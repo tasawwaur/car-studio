@@ -56,7 +56,7 @@
 
 .vn-form {
   position: absolute;
-  top: 29.5%;
+  top: 30.1%;
   left: 5.5%;
   right: 5.5%;
   z-index: 10;
@@ -70,7 +70,8 @@
   height: 52px;
   display: flex;
   align-items: center;
-  padding-left: 110px;
+  padding-left: 136px;
+  padding-top: 3px;
 }
 
 .vn-input {
