@@ -1,58 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/globals.css';
+import './VehicleNumber.css';
 
 const VehicleNumber = () => {
   const navigate = useNavigate();
+  const [vehicleNum, setVehicleNum] = useState('');
+
+  const handleSubmit = (e) => {
+    e?.preventDefault();
+    navigate('/onboarding/owner-name', { state: { regNumber: vehicleNum.toUpperCase() || 'UP 11 AB 1234' } });
+  };
 
   return (
-    <div className="onboarding-container page-container">
-      <div className="onboarding-header">
-        <div className="step-progress">
-          <div className="step active"><span className="dot">●</span> Vehicle</div>
-          <div className="step-line"></div>
-          <div className="step"><span className="dot">○</span> Owner</div>
-          <div className="step-line"></div>
-          <div className="step"><span className="dot">○</span> Verify</div>
-          <div className="step-line"></div>
-          <div className="step"><span className="dot">○</span> Profile</div>
-        </div>
-        <button className="skip-link" onClick={() => navigate('/home')}>Skip</button>
-      </div>
+    <div className="vn-container">
+      <div className="vn-background"></div>
 
-      <div className="onboarding-content">
-        <h1 className="page-title">Enter Your Vehicle Number</h1>
-        <p className="page-subtitle">We'll check official records to verify ownership</p>
+      {/* Top action buttons over poster image */}
+      <button className="vn-back-btn" aria-label="Back" onClick={() => navigate('/')} />
+      <button className="vn-skip-btn" aria-label="Skip" onClick={() => navigate('/home')} />
 
-        <div className="number-plate-input">
-          <div className="ind-badge">
-            <span className="flag">🇮🇳</span>
-            <span className="ind-text">IND</span>
-          </div>
-          <input type="text" placeholder="UP 11 AB 1234" defaultValue="UP 11 AB 1234" />
+      {/* Input area positioned over poster plate box */}
+      <form onSubmit={handleSubmit} className="vn-form">
+        <div className="vn-input-wrapper">
+          <input
+            type="text"
+            className="vn-input"
+            placeholder="UP 11 AB 1234"
+            value={vehicleNum}
+            onChange={(e) => setVehicleNum(e.target.value.toUpperCase())}
+            maxLength={13}
+            autoFocus
+          />
         </div>
 
-        <button className="btn-primary-gradient mt-24" onClick={() => navigate('/onboarding/owner')}>
-          Check Vehicle &rarr;
-        </button>
-
-        <div className="car-placeholder">
-          🚗
-        </div>
-
-        <div className="info-card">
-          <h3 className="card-heading">✅ Official Verification</h3>
-          <ul className="checklist">
-            <li>✓ RTO Vehicle Records</li>
-            <li>✓ Owner Name Match</li>
-            <li>✓ Aadhaar Linked Mobile OTP</li>
-            <li>✓ 100% Secure & Private</li>
-          </ul>
-        </div>
-      </div>
+        {/* Check Vehicle button over poster button */}
+        <button type="submit" className="vn-check-btn" aria-label="Check Vehicle" />
+      </form>
     </div>
   );
 };
-
 
 export { VehicleNumber };

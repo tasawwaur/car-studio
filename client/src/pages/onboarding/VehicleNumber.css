@@ -1,0 +1,115 @@
+.vn-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #05070D;
+}
+
+.vn-background {
+  position: absolute;
+  inset: 0;
+  background-image: url('/vehicle-verification-bg.jpg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.vn-back-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+}
+
+.vn-back-btn:hover {
+  transform: scale(1.1);
+}
+
+.vn-skip-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 60px;
+  height: 36px;
+  border-radius: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+}
+
+.vn-skip-btn:hover {
+  transform: scale(1.08);
+}
+
+.vn-form {
+  position: absolute;
+  top: 29.5%;
+  left: 5.5%;
+  right: 5.5%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.vn-input-wrapper {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding-left: 110px;
+}
+
+.vn-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  caret-color: #0075FF;
+}
+
+.vn-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.vn-check-btn {
+  margin-top: 16px;
+  width: 100%;
+  height: 52px;
+  border-radius: 26px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vn-check-btn:hover {
+  transform: scale(1.04);
+}
+
+.vn-check-btn:active {
+  transform: scale(0.97);
+}
