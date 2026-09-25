@@ -1,0 +1,188 @@
+.ps-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #05070D;
+}
+
+.ps-background {
+  position: absolute;
+  inset: 0;
+  background-image: url('/profile-setup-bg.jpg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.ps-back-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+}
+
+.ps-back-btn:hover {
+  transform: scale(1.1);
+}
+
+.ps-skip-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 60px;
+  height: 36px;
+  border-radius: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+}
+
+.ps-skip-btn:hover {
+  transform: scale(1.08);
+}
+
+.ps-form {
+  position: absolute;
+  top: 29.8%;
+  left: 11.5%;
+  right: 11.5%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.ps-gender-row {
+  width: 100%;
+  height: 37px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.ps-gender-btn {
+  flex: 1;
+  height: 100%;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 12px;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ps-gender-btn.selected::before {
+  content: '✓';
+  position: absolute;
+  top: 42%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  background: #0075FF;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 900;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 14px rgba(0, 117, 255, 1), 0 0 7px #0075FF;
+  z-index: 2;
+}
+
+.male-btn.selected::before {
+  left: 17px;
+}
+
+.female-btn.selected::before {
+  left: 14px;
+}
+
+.ps-input-row {
+  width: 100%;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5.5px;
+  padding-left: 60px;
+  box-sizing: border-box;
+}
+
+.ps-input {
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #FFFFFF !important;
+  font-size: 14px;
+  font-weight: 600;
+  caret-color: #0075FF;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.ps-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 400;
+}
+
+/* Force override Chrome/Safari autofill white background boxes */
+.ps-input:-webkit-autofill,
+.ps-input:-webkit-autofill:hover, 
+.ps-input:-webkit-autofill:focus, 
+.ps-input:-webkit-autofill:active {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 50000s ease-in-out 0s !important;
+  box-shadow: inset 0 0 20px 20px transparent !important;
+}
+
+.ps-submit-btn {
+  margin-top: 2px;
+  width: 100%;
+  height: 46px;
+  border-radius: 23px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 12px;
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-shadow: 0 0 10px rgba(0, 117, 255, 0.8);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ps-submit-btn:hover {
+  transform: scale(1.04);
+}
+
+.ps-submit-btn:active {
+  transform: scale(0.97);
+}

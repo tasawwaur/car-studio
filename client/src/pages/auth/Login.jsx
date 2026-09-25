@@ -1,69 +1,109 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { Header } from '../../components/layout/Header';
-import { Input } from '../../components/ui/Input';
-import { GradientButton } from '../../components/ui/GradientButton';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import './Login.css';
 
 export const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [isLogin, setIsLogin] = useState(true);
-  const [formData, setFormData] = useState({ email: '', password: '', name: '' });
+  const [formData, setFormData] = useState({
+    identifier: '',
+    password: ''
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Mock login
-    login({ _id: '1', name: formData.name || 'Test User', username: 'tester', verified: true }, 'mock_token');
+  const handleLogin = (e) => {
+    e?.preventDefault();
+    login(
+      {
+        _id: '1',
+        name: 'Mohammad Tasawwar',
+        email: formData.identifier || 'tasawwar@gmail.com',
+        username: 'tasavvur_malik',
+        verified: true,
+        vehicleNumber: 'UP 11 AB 1234'
+      },
+      'car_connect_login_token'
+    );
+    navigate('/home');
+  };
+
+  const handleSocialLogin = (provider) => {
+    login(
+      {
+        _id: '1',
+        name: `${provider} User`,
+        email: `user@${provider.toLowerCase()}.com`,
+        username: `${provider.toLowerCase()}_user`,
+        verified: true
+      },
+      'social_login_token'
+    );
     navigate('/home');
   };
 
   return (
-    <div className="login-page anim-fade-in">
-      <Header showBack />
-      <div className="login-content">
-        <h1 className="login-title">{isLogin ? 'Welcome Back' : 'Create Account'}</h1>
-        <p className="login-subtitle">Connect with car enthusiasts</p>
+    <div className="lg-container">
+      <div className="lg-background"></div>
 
-        <form onSubmit={handleSubmit} className="login-form">
-          {!isLogin && (
-            <Input 
-              placeholder="Full Name" 
-              value={formData.name}
-              onChange={e => setFormData({...formData, name: e.target.value})}
-            />
-          )}
-          <Input 
-            type="email"
-            placeholder="Email address" 
-            value={formData.email}
-            onChange={e => setFormData({...formData, email: e.target.value})}
+      {/* Top back button over poster image */}
+      <button className="lg-back-btn" aria-label="Back" onClick={() => navigate('/onboarding/vehicle-number')} />
+
+      {/* Interactive Form overlaying poster login card */}
+      <form onSubmit={handleLogin} className="lg-form">
+        {/* Row 1: Email / Mobile Input (✉️) */}
+        <div className="lg-input-row">
+          <input
+            type="text"
+            className="lg-input"
+            placeholder="Email address or Phone"
+            value={formData.identifier}
+            onChange={(e) => setFormData({ ...formData, identifier: e.target.value })}
+            autoComplete="off"
+            autoFocus
           />
-          <Input 
+        </div>
+
+        {/* Row 2: Password Input (🔒) */}
+        <div className="lg-input-row">
+          <input
             type="password"
-            placeholder="Password" 
+            className="lg-input"
+            placeholder="••••••••"
             value={formData.password}
-            onChange={e => setFormData({...formData, password: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+            autoComplete="current-password"
           />
-          
-          {isLogin && <div className="forgot-pass">Forgot Password?</div>}
-          
-          <GradientButton className="mt-4" type="submit">
-            {isLogin ? 'Login' : 'Sign Up'}
-          </GradientButton>
-        </form>
-
-        <div className="login-toggle">
-          {isLogin ? "Don't have an account? " : "Already have an account? "}
-          <span onClick={() => setIsLogin(!isLogin)}>{isLogin ? 'Sign Up' : 'Login'}</span>
         </div>
 
-        <div className="verify-banner">
-          <p>Own a vehicle?</p>
-          <Link to="/onboarding/vehicle-number">Verify to get special badge →</Link>
+        {/* Login Button over poster cyan/purple action button */}
+        <button type="submit" className="lg-submit-btn" aria-label="Login" />
+
+        {/* Social Login Row (Google & Facebook gold circle buttons) */}
+        <div className="lg-social-row">
+          <button
+            type="button"
+            className="lg-social-btn"
+            onClick={() => handleSocialLogin('Google')}
+            aria-label="Login with Google"
+          />
+          <button
+            type="button"
+            className="lg-social-btn"
+            onClick={() => handleSocialLogin('Facebook')}
+            aria-label="Login with Facebook"
+          />
         </div>
-      </div>
+
+        {/* Sign Up Button over poster gold pill button */}
+        <div className="lg-signup-wrapper">
+          <button
+            type="button"
+            className="lg-signup-btn"
+            onClick={() => navigate('/onboarding/vehicle-number')}
+            aria-label="Sign Up"
+          />
+        </div>
+      </form>
     </div>
   );
 };

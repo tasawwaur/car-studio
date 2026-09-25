@@ -1,0 +1,112 @@
+.on-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #05070D;
+}
+
+.on-background {
+  position: absolute;
+  inset: 0;
+  background-image: url('/owner-details-bg.jpg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.on-back-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+}
+
+.on-back-btn:hover {
+  transform: scale(1.1);
+}
+
+.on-skip-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 60px;
+  height: 36px;
+  border-radius: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
+}
+
+.on-skip-btn:hover {
+  transform: scale(1.08);
+}
+
+.on-form {
+  position: absolute;
+  top: 29.2%;
+  left: 11.5%;
+  right: 11.5%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.on-input-row {
+  width: 100%;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5.5px;
+  padding-left: 52px;
+}
+
+.on-input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  caret-color: #0075FF;
+}
+
+.on-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 400;
+}
+
+.on-continue-btn {
+  margin-top: 8px;
+  width: 100%;
+  height: 46px;
+  border-radius: 23px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.on-continue-btn:hover {
+  transform: scale(1.04);
+}
+
+.on-continue-btn:active {
+  transform: scale(0.97);
+}

@@ -17,7 +17,7 @@ const VehicleNumber = () => {
 
       {/* Top action buttons over poster image */}
       <button className="vn-back-btn" aria-label="Back" onClick={() => navigate('/')} />
-      <button className="vn-skip-btn" aria-label="Skip" onClick={() => navigate('/home')} />
+      <button className="vn-skip-btn" aria-label="Skip" onClick={() => navigate('/login')} />
 
       {/* Input area positioned over poster plate box */}
       <form onSubmit={handleSubmit} className="vn-form">

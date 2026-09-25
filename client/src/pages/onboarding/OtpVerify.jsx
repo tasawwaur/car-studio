@@ -1,57 +1,68 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../../styles/globals.css';
+import './OtpVerify.css';
 
 const OtpVerify = () => {
   const navigate = useNavigate();
+  const [otp, setOtp] = useState(['', '', '', '', '', '']);
+  const inputRefs = useRef([]);
+
+  const handleChange = (index, value) => {
+    if (!/^\d*$/.test(value)) return;
+    const newOtp = [...otp];
+    newOtp[index] = value.slice(-1);
+    setOtp(newOtp);
+
+    // Auto focus next input
+    if (value && index < 5) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyDown = (index, e) => {
+    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e?.preventDefault();
+    navigate('/onboarding/profile-setup');
+  };
 
   return (
-    <div className="onboarding-container page-container">
-      <div className="onboarding-header">
-        <div className="step-progress">
-          <div className="step completed"><span className="dot">✓</span> Vehicle</div>
-          <div className="step-line active-line"></div>
-          <div className="step completed"><span className="dot">✓</span> Owner</div>
-          <div className="step-line active-line"></div>
-          <div className="step active"><span className="dot">●</span> Verify</div>
-          <div className="step-line"></div>
-          <div className="step"><span className="dot">○</span> Profile</div>
+    <div className="ov-container">
+      <div className="ov-background"></div>
+
+      {/* Top action buttons over poster image */}
+      <button className="ov-back-btn" aria-label="Back" onClick={() => navigate('/onboarding/owner-name')} />
+      <button className="ov-skip-btn" aria-label="Skip" onClick={() => navigate('/login')} />
+
+      {/* Interactive OTP Input Form */}
+      <form onSubmit={handleSubmit} className="ov-form">
+        <div className="ov-boxes-row">
+          {otp.map((digit, idx) => (
+            <input
+              key={idx}
+              ref={(el) => (inputRefs.current[idx] = el)}
+              type="text"
+              inputMode="numeric"
+              maxLength={1}
+              className="ov-digit-input"
+              value={digit}
+              placeholder="-"
+              onChange={(e) => handleChange(idx, e.target.value)}
+              onKeyDown={(e) => handleKeyDown(idx, e)}
+              autoFocus={idx === 0}
+            />
+          ))}
         </div>
-      </div>
 
-      <div className="onboarding-content text-center">
-        <h1 className="page-title mt-24">Verify with OTP</h1>
-        <p className="page-subtitle">We've sent a 6-digit OTP to your Aadhaar linked mobile number</p>
-        <p className="bold-phone mt-8">+91 98XXXX4321</p>
-
-        <div className="otp-container mt-32">
-          <input type="text" className="otp-box" defaultValue="2" maxLength={1} />
-          <input type="text" className="otp-box" defaultValue="5" maxLength={1} />
-          <input type="text" className="otp-box" defaultValue="8" maxLength={1} />
-          <input type="text" className="otp-box" defaultValue="4" maxLength={1} />
-          <input type="text" className="otp-box" defaultValue="1" maxLength={1} />
-          <input type="text" className="otp-box" defaultValue="9" maxLength={1} />
-        </div>
-
-        <p className="resend-text mt-24">Resend OTP in <span className="countdown">00:30</span></p>
-
-        <button className="btn-primary-gradient mt-32" onClick={() => navigate('/home')}>
-          Verify & Continue
-        </button>
-
-        <div className="info-card mt-32 text-left">
-          <div className="card-header-icon">
-            <span className="shield-icon">🔒</span>
-            <h3 className="card-heading">Secure Verification</h3>
-          </div>
-          <p className="card-text mt-12">
-            OTP is sent to Aadhaar linked mobile number as per official records
-          </p>
-        </div>
-      </div>
+        {/* Verify OTP button over poster button */}
+        <button type="submit" className="ov-verify-btn" aria-label="Verify OTP" />
+      </form>
     </div>
   );
 };
-
 
 export { OtpVerify };

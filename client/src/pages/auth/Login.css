@@ -1,66 +1,161 @@
-.login-page {
-  min-height: 100vh;
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
+.lg-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #05070D;
 }
-.login-content {
-  padding: 32px 24px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+
+.lg-background {
+  position: absolute;
+  inset: 0;
+  background-image: url('/login-bg.jpg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
 }
-.login-title {
-  font-size: 32px;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-.login-subtitle {
-  color: var(--text-muted);
-  margin-bottom: 32px;
-}
-.login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.forgot-pass {
-  text-align: right;
-  font-size: 13px;
-  color: var(--primary-solid);
+
+.lg-back-btn {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
   cursor: pointer;
-  margin-top: -8px;
+  z-index: 10;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s;
 }
-.mt-4 {
-  margin-top: 16px;
+
+.lg-back-btn:hover {
+  transform: scale(1.1);
 }
-.login-toggle {
-  text-align: center;
+
+.lg-form {
+  position: absolute;
+  top: 25.5%;
+  left: 13.0%;
+  right: 13.0%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.lg-input-row {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-left: 64px;
+  box-sizing: border-box;
+}
+
+.lg-input {
+  width: 100%;
+  height: 100%;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #FFFFFF !important;
+  font-size: 14px;
+  font-weight: 600;
+  caret-color: #0075FF;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.lg-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+  font-weight: 400;
+}
+
+/* Force override Chrome/Safari autofill white background boxes */
+.lg-input:-webkit-autofill,
+.lg-input:-webkit-autofill:hover, 
+.lg-input:-webkit-autofill:focus, 
+.lg-input:-webkit-autofill:active {
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 50000s ease-in-out 0s !important;
+  box-shadow: inset 0 0 20px 20px transparent !important;
+}
+
+.lg-submit-btn {
+  margin-top: 10px;
+  width: 100%;
+  height: 44px;
+  border-radius: 22px;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lg-submit-btn:hover {
+  transform: scale(1.04);
+}
+
+.lg-submit-btn:active {
+  transform: scale(0.97);
+}
+
+.lg-social-row {
   margin-top: 32px;
-  font-size: 14px;
-  color: var(--text-muted);
+  width: 100%;
+  height: 68px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
-.login-toggle span {
-  color: var(--primary-solid);
-  font-weight: 600;
+
+.lg-social-btn {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: transparent !important;
+  border: none !important;
   cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease;
 }
-.verify-banner {
-  margin-top: auto;
-  background: linear-gradient(to right, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1));
-  border: 1px solid var(--border);
-  padding: 16px;
-  border-radius: var(--radius-md);
-  text-align: center;
+
+.lg-social-btn:hover {
+  transform: scale(1.1);
 }
-.verify-banner p {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 4px;
+
+.lg-signup-wrapper {
+  margin-top: 14px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0;
 }
-.verify-banner a {
-  font-size: 13px;
-  color: var(--primary-end);
-  text-decoration: none;
-  font-weight: 600;
+
+.lg-signup-btn {
+  width: 108px;
+  height: 38px;
+  border-radius: 19px;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease;
+}
+
+.lg-signup-btn:hover {
+  transform: scale(1.08);
 }

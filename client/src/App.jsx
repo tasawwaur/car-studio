@@ -52,14 +52,12 @@ const AppRoutes = () => {
       <Route path="/onboarding/success" element={<Success />} />
       <Route path="/onboarding/profile-setup" element={<ProfileSetup />} />
 
-      {/* Protected Routes inside AppShell (with Bottom Nav) */}
-      <Route element={<ProtectedRoute><AppShell /></ProtectedRoute>}>
-        <Route path="/home" element={<Home />} />
-        <Route path="/explore" element={<Explore />} />
-        <Route path="/inbox" element={<Inbox />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/profile/:userId" element={<Profile />} />
-      </Route>
+      {/* Main App Screens (Full-Bleed Poster with Transparent Nav Overlay) */}
+      <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+      <Route path="/explore" element={<ProtectedRoute><Explore /></ProtectedRoute>} />
+      <Route path="/inbox" element={<ProtectedRoute><Inbox /></ProtectedRoute>} />
+      <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+      <Route path="/profile/:userId" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
       {/* Protected Routes without Bottom Nav */}
       <Route element={<ProtectedRoute><AppShell hideNav /></ProtectedRoute>}>
