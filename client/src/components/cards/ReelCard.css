@@ -1,0 +1,104 @@
+.reel-card {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  background: #000;
+  scroll-snap-align: start;
+}
+.reel-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+}
+.reel-sidebar {
+  position: absolute;
+  right: 12px;
+  bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.reel-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  cursor: pointer;
+  position: relative;
+}
+.reel-action span {
+  font-size: 12px;
+  font-weight: 600;
+}
+.reel-avatar {
+  border: 2px solid white;
+}
+.follow-btn {
+  position: absolute;
+  bottom: -6px;
+  background: var(--primary-solid);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.reel-bottom {
+  position: absolute;
+  bottom: 60px;
+  left: 12px;
+  right: 60px;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+.reel-user-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.reel-username {
+  font-weight: 600;
+  font-size: 15px;
+}
+.reel-caption {
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+.reel-audio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.marquee {
+  width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee span {
+  display: inline-block;
+  animation: scrollText 5s linear infinite;
+}
+@keyframes scrollText {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}

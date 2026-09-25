@@ -1,0 +1,25 @@
+.gradient-btn {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 100px;
+  width: 100%;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.gradient-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.gradient-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+}

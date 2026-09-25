@@ -1,0 +1,123 @@
+.post-card {
+  background: var(--bg-surface, #0B111B);
+  border: 1px solid var(--border-color, rgba(255,255,255,0.10));
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-info .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+}
+
+.name-loc {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.time-loc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.follow-btn {
+  background: rgba(79, 70, 229, 0.1);
+  color: #4F46E5;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.post-media {
+  width: 100%;
+  aspect-ratio: 4/5;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-emoji {
+  font-size: 80px;
+}
+
+.page-indicator {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+}
+
+.action-left {
+  display: flex;
+  gap: 16px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-btn .icon {
+  font-size: 20px;
+}
+
+.action-btn .count {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.action-right .icon {
+  font-size: 20px;
+}
+
+.post-caption {
+  padding: 0 16px 16px 16px;
+}
+
+.caption-text {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}

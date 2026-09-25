@@ -1,0 +1,43 @@
+.community-msg {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  max-width: 90%;
+}
+.community-msg.own {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+.cm-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cm-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cm-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+.cm-bubble {
+  background: var(--surface2);
+  padding: 10px 14px;
+  border-radius: 4px 18px 18px 18px;
+  font-size: 15px;
+  position: relative;
+}
+.own .cm-bubble {
+  background: var(--primary);
+  border-radius: 18px 4px 18px 18px;
+}
+.cm-time {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 8px;
+  float: right;
+  margin-top: 4px;
+}

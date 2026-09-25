@@ -1,0 +1,12 @@
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  background-color: var(--bg);
+}
+.app-content {
+  flex: 1;
+  padding-bottom: 70px; /* space for bottom nav */
+  position: relative;
+}

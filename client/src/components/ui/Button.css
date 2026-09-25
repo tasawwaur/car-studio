@@ -1,0 +1,30 @@
+.cc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+.cc-btn:active:not(:disabled) { transform: scale(0.98); }
+.cc-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-full { width: 100%; }
+
+/* Variants */
+.btn-primary { background: var(--primary); color: var(--text); }
+.btn-outline { background: transparent; border: 1px solid var(--primary-solid); color: var(--text); }
+.btn-ghost { background: transparent; color: var(--text); }
+.btn-ghost:hover { background: var(--surface2); }
+.btn-danger { background: var(--danger); color: white; }
+
+/* Sizes */
+.btn-sm { padding: 8px 16px; font-size: 14px; }
+.btn-md { padding: 12px 24px; font-size: 16px; }
+.btn-lg { padding: 16px 32px; font-size: 18px; border-radius: var(--radius-card); }
+
+.btn-spinner { animation: spinnerRotate 1s linear infinite; }

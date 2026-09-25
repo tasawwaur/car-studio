@@ -1,0 +1,10 @@
+.reel-player {
+  height: 100vh;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  background: #000;
+}
+.reel-player::-webkit-scrollbar {
+  display: none;
+}

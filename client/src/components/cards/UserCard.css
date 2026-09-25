@@ -1,0 +1,27 @@
+.user-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+}
+.uc-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.uc-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.uc-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+.uc-username {
+  font-size: 12px;
+  color: var(--text-muted);
+}

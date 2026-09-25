@@ -1,0 +1,54 @@
+/* Shared Onboarding CSS */
+.onboarding-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+.ob-content {
+  flex: 1;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.ob-step {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-solid);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.ob-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.ob-subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+.ob-input-large .cc-input {
+  font-size: 20px;
+  font-weight: 700;
+  padding: 18px;
+  letter-spacing: 1px;
+}
+.ob-features {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ob-feature {
+  color: var(--success);
+  font-size: 14px;
+  font-weight: 500;
+}
+.ob-footer {
+  padding: 24px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}

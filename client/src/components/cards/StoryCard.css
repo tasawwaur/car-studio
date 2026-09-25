@@ -1,0 +1,47 @@
+.story-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 72px;
+  cursor: pointer;
+}
+.story-ring {
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--primary);
+  position: relative;
+}
+.story-ring.viewed {
+  background: var(--surface2);
+}
+.story-ring.self {
+  background: transparent;
+  border: 1px dashed var(--border);
+}
+.story-ring .cc-avatar {
+  border: 2px solid var(--bg);
+}
+.story-add-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--primary);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg);
+}
+.story-name {
+  font-size: 11px;
+  color: var(--text);
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

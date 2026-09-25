@@ -1,0 +1,70 @@
+.vp-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+.vp-hero {
+  height: 250px;
+  background: var(--surface2);
+  width: 100%;
+}
+.vp-content {
+  padding: 24px;
+}
+.vp-header {
+  margin-bottom: 24px;
+}
+.vp-title {
+  font-size: 24px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.vp-reg {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.vp-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.spec {
+  background: var(--surface);
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+}
+.spec span {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.vp-owner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: var(--surface);
+  border-radius: 12px;
+}
+.vp-owner-info {
+  flex: 1;
+}
+.vp-follow-btn {
+  background: transparent;
+  border: 1px solid var(--primary-solid);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 100px;
+  cursor: pointer;
+}

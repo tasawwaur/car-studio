@@ -1,0 +1,55 @@
+.success-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+.success-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+.success-icon-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.success-icon-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: var(--success);
+  border-radius: 50%;
+  opacity: 0.2;
+}
+.success-icon {
+  color: var(--success);
+  position: relative;
+  z-index: 2;
+}
+.success-title {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.success-badge {
+  transform: scale(1.2);
+  margin-bottom: 16px;
+}
+.success-subtitle {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+.success-footer {
+  padding: 24px;
+}
+.pulse {
+  animation: pulse 2s infinite;
+}

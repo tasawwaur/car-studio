@@ -1,0 +1,25 @@
+.home-page {
+  background-color: var(--bg-dark, #05070D);
+  min-height: 100vh;
+  color: var(--text-light, #FFFFFF);
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-header {
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.feed-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}

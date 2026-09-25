@@ -1,0 +1,12 @@
+.verified-badge {
+  background: #3B82F6;
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.badge-sm { width: 14px; height: 14px; }
+.badge-md { width: 18px; height: 18px; }
+.badge-lg { width: 24px; height: 24px; }

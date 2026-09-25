@@ -1,0 +1,29 @@
+.notifications-page {
+  min-height: 100vh;
+  background: var(--bg);
+}
+.n-list {
+  padding: 16px;
+}
+.n-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.n-content {
+  flex: 1;
+  font-size: 14px;
+}
+.n-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.n-preview {
+  width: 40px;
+  height: 40px;
+  background: var(--surface2);
+  border-radius: 4px;
+}

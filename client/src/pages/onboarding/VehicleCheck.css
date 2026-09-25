@@ -1,0 +1,39 @@
+.check-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  padding: 24px;
+}
+.loader-ring {
+  width: 80px;
+  height: 80px;
+  border: 4px solid var(--surface2);
+  border-top-color: var(--primary-solid);
+  border-radius: 50%;
+  animation: spinnerRotate 1s linear infinite;
+  margin-bottom: 40px;
+}
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 300px;
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  color: var(--text-muted);
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+.check-item.active {
+  opacity: 1;
+  color: var(--text);
+  transform: translateX(10px);
+}

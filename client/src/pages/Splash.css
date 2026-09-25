@@ -1,0 +1,96 @@
+.splash-container {
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #05070D;
+}
+
+.splash-background {
+  position: absolute;
+  inset: 0;
+  background-image: url('/splash-bg.jpg');
+  background-size: 100% 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+.splash-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 20px 32px 20px;
+}
+
+.splash-top-space {
+  flex: 1;
+}
+
+.splash-bottom-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.splash-container .btn-primary-gradient {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 56px !important;
+  border-radius: 28px !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.splash-container .btn-primary-gradient:hover {
+  transform: scale(1.04);
+}
+
+.splash-container .btn-primary-gradient:active {
+  transform: scale(0.97);
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.splash-container .btn-ghost {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: transparent !important;
+  font-size: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 52px !important;
+  border-radius: 28px !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.splash-container .btn-ghost:hover {
+  transform: scale(1.04);
+}
+
+.splash-container .btn-ghost:active {
+  transform: scale(0.97);
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
