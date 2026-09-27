@@ -48,6 +48,16 @@
   box-shadow: 0 0 10px rgba(234, 179, 8, 0.5);
 }
 
+.pc-crown-emoji {
+  position: absolute;
+  top: -8px;
+  right: -6px;
+  font-size: 16px;
+  filter: drop-shadow(0 0 6px rgba(253, 224, 71, 0.9));
+  user-select: none;
+  pointer-events: none;
+}
+
 .pc-avatar-fallback {
   width: 100%;
   height: 100%;

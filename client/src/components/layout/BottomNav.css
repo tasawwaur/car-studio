@@ -1,125 +1,147 @@
 /* ═══════════════════════════════════════════════════════════
-   Luxury Golden Bottom Navigation Bar — Mobile Optimized
+   Luxury Golden Bottom Navigation Bar — Mobile & Desktop
    ═══════════════════════════════════════════════════════════ */
 
 .bottom-nav-wrapper {
   position: fixed;
-  bottom: -24px;
+  bottom: 12px;
   left: 0;
   right: 0;
   z-index: 9999;
   display: flex;
   justify-content: center;
   pointer-events: none;
-  padding: 0 4px;
-  background: transparent;
+  padding: 0 12px;
 }
 
 .golden-nav-container {
   pointer-events: auto;
   position: relative;
-  width: 98%;
-  max-width: 440px;
-  aspect-ratio: 1024 / 341;
-  user-select: none;
-  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.75));
-}
-
-/* Golden Image Bar */
-.golden-nav-img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  pointer-events: none;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  max-width: 440px;
+  user-select: none;
 }
 
-/* Touch Hitboxes Overlay */
+.golden-nav-base {
+  position: relative;
+  width: 100%;
+  background: rgba(10, 15, 28, 0.95);
+  border: 1.5px solid #EAB308;
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(234, 179, 8, 0.4), inset 0 1px 2px rgba(253, 224, 71, 0.5);
+  backdrop-filter: blur(16px);
+  padding: 8px 12px;
+}
+
 .golden-nav-hitboxes {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2.5%;
 }
 
 .golden-hitbox {
   flex: 1;
-  height: 100%;
   border: none;
   background: transparent;
   cursor: pointer;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 3px;
+  padding: 2px 0;
+  color: #94A3B8;
+  transition: all 0.2s ease;
+  position: relative;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.12s ease;
 }
 
-.golden-hitbox:active {
+.golden-hitbox:hover, .golden-hitbox.active {
+  color: #FDE047;
+}
+
+.nav-icon-circle {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.golden-hitbox.active .nav-icon-circle {
+  background: linear-gradient(135deg, rgba(234, 179, 8, 0.3), rgba(168, 85, 247, 0.3));
+  box-shadow: 0 0 14px rgba(234, 179, 8, 0.6);
+  transform: translateY(-2px);
+}
+
+.nav-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.golden-hitbox.active .nav-label {
+  color: #FDE047;
+}
+
+/* Center Plus Action Orb */
+.center-plus-hitbox {
+  flex: 1.1;
+}
+
+.center-plus-orb {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #FDE047 0%, #EAB308 50%, #A855F7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.8), 0 4px 14px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease;
+  margin-top: -14px;
+  border: 2px solid #000;
+}
+
+.center-plus-hitbox:active .center-plus-orb {
   transform: scale(0.9);
 }
 
-.golden-hitbox:hover {
-  filter: brightness(1.1);
+.plus-symbol {
+  font-size: 28px;
+  font-weight: 900;
+  color: #050A14;
+  line-height: 1;
 }
 
-/* Center Plus Hitbox */
-.center-plus-hitbox {
-  flex: 1.15;
-}
-
-/* Active State Glowing Underline Indicator */
 .active-indicator {
   position: absolute;
-  bottom: 14%;
-  width: 24px;
+  bottom: -4px;
+  width: 20px;
   height: 3px;
-  background: linear-gradient(90deg, #FDE047, #A855F7, #FDE047);
-  border-radius: 4px;
-  box-shadow: 0 0 10px #FDE047, 0 0 16px #A855F7;
-  animation: activeGlowPulse 1.6s infinite alternate ease-in-out;
-}
-
-.center-indicator {
-  bottom: 12%;
-  width: 28px;
-  height: 3.5px;
-}
-
-@keyframes activeGlowPulse {
-  0% {
-    opacity: 0.75;
-    box-shadow: 0 0 8px #FDE047, 0 0 14px #A855F7;
-    transform: scaleX(0.9);
-  }
-  100% {
-    opacity: 1;
-    box-shadow: 0 0 14px #FDE047, 0 0 24px #A855F7;
-    transform: scaleX(1.1);
-  }
+  background: #FDE047;
+  border-radius: 3px;
+  box-shadow: 0 0 10px #FDE047;
 }
 
 /* Inbox Notification Badge */
 .inbox-badge {
   position: absolute;
-  top: 24%;
-  right: 18%;
+  top: -4px;
+  right: -4px;
   background: linear-gradient(135deg, #EF4444, #DC2626);
   color: #FFFFFF;
   font-size: 9px;
   font-weight: 800;
-  min-width: 15px;
-  height: 15px;
-  padding: 0 3px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -128,23 +150,4 @@
   box-shadow: 0 0 8px rgba(239, 68, 68, 0.9);
   pointer-events: none;
   z-index: 10;
-}
-
-/* Media Query for Small Screens */
-@media (max-width: 380px) {
-  .golden-nav-container {
-    width: 100%;
-    max-width: 360px;
-  }
-  .active-indicator {
-    width: 20px;
-    height: 2.5px;
-  }
-  .inbox-badge {
-    top: 22%;
-    right: 14%;
-    font-size: 8px;
-    min-width: 14px;
-    height: 14px;
-  }
 }
