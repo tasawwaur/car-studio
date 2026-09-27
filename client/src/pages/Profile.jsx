@@ -26,40 +26,36 @@ const Profile = () => {
 
   const isMe = !userId || userId === 'me' || userId === 'my_user_id' || (user?._id && realPlayer?.id === user._id);
 
-  const profileName = isMe ? (user?.name || 'Mohammad Tasawwar') : (realPlayer?.name || 'Verified Driver');
-  const username = isMe ? `@${user?.username || 'tasavvur_malik'}` : `@${realPlayer?.username || 'driver'}`;
-  const vehicleNumber = isMe ? (user?.vehicleNumber || 'UP 11 AB 1234') : (realPlayer?.vehicleNumber || 'MH 02 CZ 7777');
+  const profileName = realPlayer ? realPlayer.name : (user?.name || 'Mohammad Tasawwar');
+  const username = realPlayer ? `@${realPlayer.username}` : `@${user?.username || 'tasavvur_malik'}`;
+  const vehicleNumber = realPlayer ? realPlayer.vehicleNumber : (user?.vehicleNumber || 'UP 11 AB 1234');
   const postsCount = realPlayer ? '124' : '124';
-  const followersCount = realPlayer ? (realPlayer.followersCount || '1,250') : '1,250';
-  const followingCount = realPlayer ? (realPlayer.followingCount || '382') : '382';
-  const isVerified = isMe ? true : (realPlayer?.isVerified !== false);
+  const followersCount = realPlayer ? (realPlayer.followersCount || '1,250') : (user?.followersCount || '1,250');
+  const followingCount = realPlayer ? (realPlayer.followingCount || '382') : (user?.followingCount || '382');
+  const isVerified = realPlayer ? (realPlayer.isVerified !== false) : true;
   
   const coverImage = realPlayer?.coverImage || 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=1000';
 
   const [activeTab, setActiveTab] = useState('posts'); // 'posts' | 'reels' | 'vehicles'
   const [avatar, setAvatar] = useState(
-    isMe 
-      ? (user?.avatar || 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300')
-      : (realPlayer?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300')
+    realPlayer ? realPlayer.avatar : (user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300')
   );
   const [bio, setBio] = useState(
-    isMe 
-      ? 'Car enthusiast | Travel | Photography' 
-      : (realPlayer?.bio || 'Car enthusiast | Travel | High performance drives')
+    realPlayer ? realPlayer.bio : (user?.bio || 'Car enthusiast | Travel | Photography')
   );
   const [locationText, setLocationText] = useState('Saharanpur, Uttar Pradesh');
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
 
   useEffect(() => {
-    if (isMe) {
-      setAvatar(user?.avatar || 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=300');
-      setBio('Car enthusiast | Travel | Photography');
-    } else if (realPlayer) {
+    if (realPlayer) {
       setAvatar(realPlayer.avatar);
       setBio(realPlayer.bio || 'Car enthusiast | Travel | High performance drives');
+    } else if (user) {
+      setAvatar(user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300');
+      setBio(user.bio || 'Car enthusiast | Travel | Photography');
     }
-  }, [userId, isMe, realPlayer, user]);
+  }, [userId, realPlayer, user]);
 
   /* ── Avatar Photo Upload ── */
   const handleAvatarClick = () => {
