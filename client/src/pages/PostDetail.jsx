@@ -40,6 +40,17 @@ export const PostDetail = () => {
   useEffect(() => {
     const load = async () => {
       try {
+        const savedFeed = localStorage.getItem('cc_home_feed');
+        if (savedFeed) {
+          const feed = JSON.parse(savedFeed);
+          const found = feed.find(p => p._id === id);
+          if (found) {
+            setPost(found);
+            setLikesCount(found.likesCount || 0);
+            setComments(MOCK_COMMENTS);
+            return;
+          }
+        }
         const [postRes, commentsRes] = await Promise.all([
           postsApi.getPost(id),
           postsApi.getComments(id),

@@ -6,6 +6,11 @@ const BottomNav = ({ unreadCount }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // BottomNav should ONLY show on Home page (/home or /)
+  if (location.pathname !== '/home' && location.pathname !== '/') {
+    return null;
+  }
+
   const getTab = () => {
     const path = location.pathname;
     if (path.startsWith('/explore')) return 'explore';

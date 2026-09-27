@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { posts as postsApi } from '../services/api';
 import './CreatePost.css';
 
 const TABS = ['Photo', 'Video', 'Reel', 'Text'];
@@ -8,12 +9,15 @@ const TABS = ['Photo', 'Video', 'Reel', 'Text'];
 const CreatePost = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const { user } = useContext(AuthContext);
 
   const [activeTab, setActiveTab] = useState('Photo');
   const [caption, setCaption] = useState('Mountain vibes 🏔️🚗 #roadtrip #thar #mountains');
-  const [location, setLocation] = useState('Mussoorie, Uttarakhand');
-  const [vehicle, setVehicle] = useState('UP 11 AB 1234 (Thar)');
+  const [location, setLocation] = useState('Saharanpur, Uttar Pradesh');
+  const [vehicle, setVehicle] = useState(user?.vehicleNumber ? `${user.vehicleNumber} (Owner)` : 'UP 11 AB 1234 (Thar)');
   const [privacy, setPrivacy] = useState('Public');
+  const [posting, setPosting] = useState(false);
+  const [postSuccessMsg, setPostSuccessMsg] = useState('');
   
   const [mediaPreview, setMediaPreview] = useState(
     'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800'
@@ -22,7 +26,11 @@ const CreatePost = () => {
   const handleFileChange = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      setMediaPreview(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setMediaPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -30,22 +38,25 @@ const CreatePost = () => {
     setMediaPreview(null);
   };
 
-  const handlePost = () => {
+  const handlePost = async () => {
+    if (posting) return;
+    setPosting(true);
+
+    const imageUrl = mediaPreview || 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800';
+
     const newPost = {
       _id: `post_${Date.now()}`,
       author: {
         _id: user?._id || 'u1',
-        name: user?.name || 'Tasavvur Malik',
-        username: 'tasavvur_malik',
+        name: user?.name || 'Mohammad Tasawwar',
+        username: user?.username || 'tasawwar_cars',
         isVerified: true,
         vehicleNumber: user?.vehicleNumber || 'UP 11 AB 1234',
         avatar: user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150'
       },
-      mediaUrls: [
-        mediaPreview || 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800'
-      ],
+      mediaUrls: [imageUrl],
       mediaType: activeTab === 'Video' || activeTab === 'Reel' ? 'video' : 'image',
-      caption: caption || 'New Car Post 🚗✨',
+      caption: caption || 'New Car Post 🚗⚡',
       location: location || 'Saharanpur · India',
       likesCount: 1,
       commentsCount: 0,
@@ -53,6 +64,7 @@ const CreatePost = () => {
       createdAt: new Date().toISOString()
     };
 
+    // 1. Instantly save to LocalStorage (persistent offline & instant feed sync)
     try {
       const savedFeed = localStorage.getItem('cc_home_feed');
       const existing = savedFeed ? JSON.parse(savedFeed) : [
@@ -81,13 +93,35 @@ const CreatePost = () => {
       ];
       const updated = [newPost, ...existing];
       localStorage.setItem('cc_home_feed', JSON.stringify(updated));
-    } catch (err) {}
+    } catch (err) {
+      console.error('LocalStorage save error:', err);
+    }
 
-    navigate('/home');
+    // 2. Dispatch custom event for real-time feed updates
+    window.dispatchEvent(new Event('cc_feed_updated'));
+
+    // 3. Send to API asynchronously (if backend server is online)
+    try {
+      await postsApi.createPost({
+        caption: newPost.caption,
+        location: newPost.location,
+        mediaUrls: newPost.mediaUrls,
+        mediaType: newPost.mediaType
+      });
+    } catch (apiErr) {
+      // Local fallback active
+    }
+
+    setPostSuccessMsg('🎉 Post published successfully!');
+    
+    setTimeout(() => {
+      setPosting(false);
+      navigate('/home');
+    }, 500);
   };
 
   return (
-    <div className="cp-page">
+    <div className="cp-page anim-fade-in">
       {/* ── Header ── */}
       <header className="cp-header">
         <button className="cp-back-btn" onClick={() => navigate(-1)}>←</button>
@@ -96,6 +130,21 @@ const CreatePost = () => {
 
       {/* ── Main Content ── */}
       <div className="cp-content">
+
+        {postSuccessMsg && (
+          <div style={{
+            background: 'rgba(52, 211, 153, 0.2)',
+            border: '1px solid #34D399',
+            color: '#34D399',
+            padding: '10px 14px',
+            borderRadius: '12px',
+            textAlign: 'center',
+            fontWeight: 'bold',
+            marginBottom: '12px'
+          }}>
+            {postSuccessMsg}
+          </div>
+        )}
 
         {/* Post Type Selector Tabs */}
         <div className="cp-type-tabs">
@@ -110,7 +159,7 @@ const CreatePost = () => {
           ))}
         </div>
 
-        {/* Media Preview Box */}
+        {/* Media Preview / Selection Box */}
         {activeTab !== 'Text' && (
           <div className="cp-media-box">
             {mediaPreview ? (
@@ -121,7 +170,7 @@ const CreatePost = () => {
             ) : (
               <div className="cp-upload-placeholder" onClick={() => fileInputRef.current?.click()}>
                 <span className="cp-upload-icon">📷</span>
-                <span className="cp-upload-text">Select Photo or Video</span>
+                <span className="cp-upload-text">Tap to Select Photo or Video</span>
               </div>
             )}
 
@@ -145,7 +194,7 @@ const CreatePost = () => {
               <input 
                 type="text" 
                 className="cp-opt-input"
-                placeholder="Write a caption..."
+                placeholder="Write a caption for your car..."
                 value={caption}
                 onChange={(e) => setCaption(e.target.value)}
               />
@@ -160,7 +209,7 @@ const CreatePost = () => {
               <input 
                 type="text" 
                 className="cp-opt-input"
-                placeholder="Mussoorie, Uttarakhand"
+                placeholder="Saharanpur, Uttar Pradesh"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
               />
@@ -171,7 +220,7 @@ const CreatePost = () => {
           {/* Tag People */}
           <div className="cp-option-item">
             <span className="cp-opt-icon">👤</span>
-            <span className="cp-opt-title">Tag People</span>
+            <span className="cp-opt-title">Tag Drivers / Friends</span>
             <span className="cp-opt-arrow">›</span>
           </div>
 
@@ -180,7 +229,12 @@ const CreatePost = () => {
             <span className="cp-opt-icon">🚗</span>
             <div className="cp-opt-col">
               <span className="cp-opt-label">Select Vehicle</span>
-              <span className="cp-opt-val">🚙 {vehicle}</span>
+              <input 
+                type="text"
+                className="cp-opt-input"
+                value={vehicle}
+                onChange={(e) => setVehicle(e.target.value)}
+              />
             </div>
             <span className="cp-opt-arrow">›</span>
           </div>
@@ -190,15 +244,27 @@ const CreatePost = () => {
             <span className="cp-opt-icon">🔒</span>
             <div className="cp-opt-col">
               <span className="cp-opt-label">Post Privacy</span>
-              <span className="cp-opt-val">{privacy}</span>
+              <select 
+                value={privacy} 
+                onChange={(e) => setPrivacy(e.target.value)}
+                style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '13px', fontWeight: 'bold' }}
+              >
+                <option value="Public" style={{ background: '#0F172A' }}>Public (Everyone)</option>
+                <option value="Followers" style={{ background: '#0F172A' }}>Followers Only</option>
+              </select>
             </div>
             <span className="cp-opt-arrow">›</span>
           </div>
         </div>
 
         {/* Post Submit Button */}
-        <button className="cp-post-btn" onClick={handlePost}>
-          Post
+        <button 
+          className="cp-post-btn" 
+          onClick={handlePost} 
+          disabled={posting}
+          style={{ opacity: posting ? 0.7 : 1, cursor: posting ? 'not-allowed' : 'pointer' }}
+        >
+          {posting ? '🚀 Publishing Post...' : '🚀 Post Now'}
         </button>
 
       </div>

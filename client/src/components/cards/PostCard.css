@@ -82,6 +82,17 @@
   pointer-events: none;
 }
 
+.pc-crown-badge-emoji {
+  position: absolute;
+  top: -8px;
+  left: -4px;
+  font-size: 16px;
+  filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.9));
+  user-select: none;
+  pointer-events: none;
+  z-index: 5;
+}
+
 .pc-user-info {
   display: flex;
   flex-direction: column;

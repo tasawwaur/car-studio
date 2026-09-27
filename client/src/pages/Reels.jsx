@@ -327,6 +327,7 @@ const Reels = () => {
     <div className="rl-page">
       {/* Header */}
       <div className="rl-header">
+        <button className="rl-back-btn" onClick={() => navigate(-1)} style={{ background: 'transparent', border: 'none', color: '#fff', fontSize: '20px', cursor: 'pointer', paddingRight: '8px' }}>←</button>
         <span className="rl-header-title">Reels</span>
         <button className="rl-camera-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" width="22" height="22">

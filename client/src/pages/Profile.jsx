@@ -1,11 +1,11 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import REAL_PLAYERS_DATA, { getPlayerByNameOrId, getUserAvatar } from '../data/realPlayersData';
 import BottomNav from '../components/layout/BottomNav';
 import './Profile.css';
 
-/* ── Sample User Posts for 3x3 Grid ── */
+/* ── Sample User Posts, Reels & Garage Vehicles ── */
 const USER_POSTS = [
   { id: 'p1', img: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800', type: 'image' },
   { id: 'p2', img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800', type: 'image' },
@@ -13,6 +13,59 @@ const USER_POSTS = [
   { id: 'p4', img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800', type: 'image' },
   { id: 'p5', img: 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800', type: 'image' },
   { id: 'p6', img: 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=800', type: 'image' }
+];
+
+const USER_REELS = [
+  { id: 'r1', img: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800', title: 'Mountain Drift 🏎️', views: '45.2K' },
+  { id: 'r2', img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800', title: 'Highway Launch ⚡', views: '128K' },
+  { id: 'r3', img: 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=800', title: 'V8 Exhaust Sound 🔥', views: '89.4K' }
+];
+
+const GARAGE_VEHICLES = [
+  {
+    id: 'v1',
+    name: 'Porsche 911 GT3 RS',
+    price: '₹3.80 Cr',
+    power: '525 HP',
+    topSpeed: '296 KM/H',
+    acc: '3.2s (0-100)',
+    status: 'FOR SALE · Track Spec',
+    forSale: true,
+    img: 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?w=800'
+  },
+  {
+    id: 'v2',
+    name: 'Lamborghini Huracán STO',
+    price: '₹4.90 Cr',
+    power: '640 HP',
+    topSpeed: '325 KM/H',
+    acc: '3.0s (0-100)',
+    status: 'FOR SALE · V10 Beast',
+    forSale: true,
+    img: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800'
+  },
+  {
+    id: 'v3',
+    name: 'Mahindra Thar 4x4 Offroad',
+    price: '₹18.5 Lakh',
+    power: '150 HP',
+    topSpeed: '160 KM/H',
+    acc: '10.2s (0-100)',
+    status: 'FOR SALE · Offroad Spec',
+    forSale: true,
+    img: 'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800'
+  },
+  {
+    id: 'v4',
+    name: 'Mercedes-AMG G63',
+    price: '₹3.30 Cr',
+    power: '585 HP',
+    topSpeed: '240 KM/H',
+    acc: '4.5s (0-100)',
+    status: 'IN GARAGE · Verified Owner',
+    forSale: false,
+    img: 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?w=800'
+  }
 ];
 
 const Profile = () => {
@@ -46,6 +99,38 @@ const Profile = () => {
   const [locationText, setLocationText] = useState('Saharanpur, Uttar Pradesh');
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+  
+  const [buyModalVehicle, setBuyModalVehicle] = useState(null);
+  const [offerPrice, setOfferPrice] = useState('');
+  const [dealSuccessMsg, setDealSuccessMsg] = useState('');
+
+  const handleOpenBuyModal = (vehicle, e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    setBuyModalVehicle(vehicle);
+    setOfferPrice(vehicle.price);
+  };
+
+  const handleSendDealOffer = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    if (!buyModalVehicle) return;
+    
+    const deal = {
+      id: Date.now().toString(),
+      vehicleName: buyModalVehicle.name,
+      sellerName: profileName,
+      offerPrice: offerPrice || buyModalVehicle.price,
+      timestamp: new Date().toLocaleString()
+    };
+
+    try {
+      const savedDeals = JSON.parse(localStorage.getItem('cc_car_deals') || '[]');
+      localStorage.setItem('cc_car_deals', JSON.stringify([deal, ...savedDeals]));
+    } catch {}
+
+    setDealSuccessMsg(`🎉 Real-Time Deal Offer of ${offerPrice || buyModalVehicle.price} submitted to ${profileName}!`);
+    setBuyModalVehicle(null);
+    setTimeout(() => setDealSuccessMsg(''), 5000);
+  };
 
   useEffect(() => {
     if (realPlayer) {
@@ -227,16 +312,113 @@ const Profile = () => {
           </button>
         </div>
 
-        {/* ── 3x3 Photo Grid ── */}
-        <div className="pf-grid-container">
-          {USER_POSTS.map((p) => (
-            <div key={p.id} className="pf-grid-card" onClick={() => navigate(`/post/${p.id}`)}>
-              <img src={p.img} alt="Car post" className="pf-grid-thumb" />
-            </div>
-          ))}
-        </div>
+        {/* ── Dynamic Tab Content (Posts | Reels | Garage Vehicles) ── */}
+        {activeTab === 'posts' && (
+          <div className="pf-grid-container">
+            {USER_POSTS.map((p) => (
+              <div key={p.id} className="pf-grid-card" onClick={() => navigate(`/post/${p.id}`)}>
+                <img src={p.img} alt="Car post" className="pf-grid-thumb" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {activeTab === 'reels' && (
+          <div className="pf-grid-container">
+            {USER_REELS.map((r) => (
+              <div key={r.id} className="pf-grid-card reel-card" onClick={() => navigate('/reels')}>
+                <img src={r.img} alt={r.title} className="pf-grid-thumb" />
+                <div className="reel-overlay-badge">
+                  <span>▶ {r.views}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* ── Real-Time Success Deal Banner ── */}
+        {dealSuccessMsg && (
+          <div className="pf-deal-toast-banner">
+            {dealSuccessMsg}
+          </div>
+        )}
+
+        {activeTab === 'vehicles' && (
+          <div className="pf-garage-vehicles-list">
+            {GARAGE_VEHICLES.map((v) => (
+              <div key={v.id} className="pf-vehicle-card" onClick={() => navigate(`/booking/${v.id}`)}>
+                <img src={v.img} alt={v.name} className="pf-vehicle-img" />
+                <div className="pf-vehicle-info">
+                  <div className="pf-vh-header">
+                    <h3 className="pf-vh-name">{v.name}</h3>
+                    <span className="pf-vh-price">{v.price}</span>
+                  </div>
+                  <p className="pf-vh-status">✓ {v.status}</p>
+                  <div className="pf-vh-specs-grid">
+                    <div className="pf-spec-tag">⚡ {v.power}</div>
+                    <div className="pf-spec-tag">🏎️ {v.topSpeed}</div>
+                    <div className="pf-spec-tag">⏱️ {v.acc}</div>
+                  </div>
+
+                  {v.forSale && (
+                    <button 
+                      className="pf-buy-deal-btn"
+                      onClick={(e) => handleOpenBuyModal(v, e)}
+                    >
+                      🏷️ Make Offer / Buy ({v.price})
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
 
       </div>
+
+      {/* ── REAL-TIME CAR PURCHASE / DEAL OFFER MODAL DRAWER ── */}
+      {buyModalVehicle && (
+        <div className="deal-modal-overlay" onClick={() => setBuyModalVehicle(null)}>
+          <div className="deal-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="deal-modal-handle" />
+            
+            <div className="deal-modal-header">
+              <h3>🏎️ Real-Time Car Deal Offer</h3>
+              <button className="deal-close-btn" onClick={() => setBuyModalVehicle(null)}>✕</button>
+            </div>
+
+            <div className="deal-vehicle-preview">
+              <img src={buyModalVehicle.img} alt={buyModalVehicle.name} className="deal-preview-img" />
+              <div className="deal-preview-text">
+                <h4>{buyModalVehicle.name}</h4>
+                <p className="deal-asking-price">Asking Price: <strong>{buyModalVehicle.price}</strong></p>
+                <p className="deal-seller-name">Seller: <span>{profileName}</span></p>
+              </div>
+            </div>
+
+            <form className="deal-offer-form" onSubmit={handleSendDealOffer}>
+              <label className="deal-input-label">Your Offer Price (₹)</label>
+              <input 
+                type="text" 
+                className="deal-price-input" 
+                value={offerPrice}
+                onChange={(e) => setOfferPrice(e.target.value)}
+                placeholder="e.g. ₹3,75,00,000"
+              />
+
+              <div className="deal-info-pills">
+                <span className="deal-info-pill">✓ RTO Verified</span>
+                <span className="deal-info-pill">✓ Insured</span>
+                <span className="deal-info-pill">⚡ {buyModalVehicle.power}</span>
+              </div>
+
+              <button type="submit" className="deal-submit-btn">
+                🚀 Submit Deal Offer ({offerPrice || buyModalVehicle.price})
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* ── Bottom Nav Bar ── */}
       <BottomNav />

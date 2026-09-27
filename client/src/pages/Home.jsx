@@ -66,27 +66,75 @@ const STORIES_DATA = [
 const Home = () => {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
+  const storyInputRef = useRef(null);
 
   const [activeStory, setActiveStory] = useState(null);
+  const [stories, setStories] = useState(() => {
+    try {
+      const saved = localStorage.getItem('cc_stories');
+      return saved ? JSON.parse(saved) : STORIES_DATA;
+    } catch {
+      return STORIES_DATA;
+    }
+  });
 
-  const [posts, setPosts] = useState(() => {
+  const handleStoryClick = (s) => {
+    if (s.isAdd) {
+      storyInputRef.current?.click();
+    } else {
+      setActiveStory(s);
+    }
+  };
+
+  const handleStoryUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const newStory = {
+          id: `story_${Date.now()}`,
+          img: reader.result,
+          name: user?.name || 'Tasawwar Malik',
+          vehicle: user?.vehicleNumber || 'UP 11 AB 1234',
+          label: 'Your Story',
+          active: true
+        };
+        const updated = [stories[0], newStory, ...stories.slice(1)];
+        setStories(updated);
+        try { localStorage.setItem('cc_stories', JSON.stringify(updated)); } catch {}
+        setActiveStory(newStory);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const loadPostsFromStorage = () => {
     try {
       const saved = localStorage.getItem('cc_home_feed');
       return saved ? JSON.parse(saved) : DYNAMIC_FEED_POSTS;
     } catch {
       return DYNAMIC_FEED_POSTS;
     }
-  });
+  };
+
+  const [posts, setPosts] = useState(loadPostsFromStorage);
 
   useEffect(() => {
     const handleSync = () => {
-      try {
-        const saved = localStorage.getItem('cc_home_feed');
-        if (saved) setPosts(JSON.parse(saved));
-      } catch {}
+      setPosts(loadPostsFromStorage());
     };
+
+    handleSync();
+
     window.addEventListener('storage', handleSync);
-    return () => window.removeEventListener('storage', handleSync);
+    window.addEventListener('cc_feed_updated', handleSync);
+    window.addEventListener('focus', handleSync);
+
+    return () => {
+      window.removeEventListener('storage', handleSync);
+      window.removeEventListener('cc_feed_updated', handleSync);
+      window.removeEventListener('focus', handleSync);
+    };
   }, []);
 
   return (
@@ -114,13 +162,22 @@ const Home = () => {
       {/* ── Scrollable Feed ── */}
       <div className="hm-feed">
 
+        {/* Hidden Story File Input */}
+        <input 
+          type="file" 
+          ref={storyInputRef} 
+          onChange={handleStoryUpload} 
+          accept="image/*" 
+          style={{ display: 'none' }} 
+        />
+
         {/* Stories Row with Glowing Rings */}
         <div className="hm-stories">
-          {STORIES_DATA.map((s) => (
+          {stories.map((s) => (
             <div 
               key={s.id} 
               className="hm-story-item"
-              onClick={() => setActiveStory(s)}
+              onClick={() => handleStoryClick(s)}
             >
               <div className="hm-story-img-wrapper">
                 <img src={s.img} alt={s.label} className="hm-story-crop-img" />

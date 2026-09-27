@@ -96,7 +96,7 @@ const Followers = () => {
               <div className={`fl-avatar-frame-wrap ${player.avatarFrame}`}>
                 <img src={player.avatar} alt={player.name} className="fl-avatar-img" />
                 {player.avatarFrame === 'crown_gold' && (
-                  <img src="/gold-crown.png" alt="Crown" className="fl-crown-overlay" />
+                  <span className="fl-crown-emoji" style={{ position: 'absolute', top: '-8px', left: '-4px', fontSize: '16px', zIndex: 3 }}>👑</span>
                 )}
                 <span className={`fl-online-dot ${player.isOnline ? 'online' : 'offline'}`} />
               </div>
@@ -129,8 +129,8 @@ const Followers = () => {
 
                 <button 
                   className="fl-msg-btn"
-                  onClick={(e) => { e.stopPropagation(); navigate(`/inbox/c1`); }}
-                  title="Message Driver"
+                  onClick={(e) => { e.stopPropagation(); navigate(`/inbox/${player.id}`); }}
+                  title={`Message ${player.name}`}
                 >
                   💬
                 </button>

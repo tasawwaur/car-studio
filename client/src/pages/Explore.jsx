@@ -41,8 +41,8 @@ const Explore = () => {
 
       {/* ── Sticky Luxury Header Bar ── */}
       <header className="xp-header">
-        <button className="xp-hdr-round-btn" aria-label="Search Action">
-          🔍
+        <button className="xp-hdr-round-btn" onClick={() => navigate(-1)} aria-label="Go Back">
+          ←
         </button>
 
         {/* Pill Search Bar */}
@@ -71,7 +71,7 @@ const Explore = () => {
           {FEATURED_STORIES.map(s => (
             <div key={s.id} className="xp-story-item">
               <div className="xp-story-ring">
-                {s.isCrown && <img src="/gold-crown.png" alt="Crown" className="xp-crown-icon" />}
+                {s.isCrown && <span className="xp-crown-emoji" style={{ position: 'absolute', top: '-8px', left: '-4px', fontSize: '14px', zIndex: 3 }}>👑</span>}
                 <img src={s.img} alt={s.label} className="xp-story-img" />
               </div>
               <span className="xp-story-accent-bar" />

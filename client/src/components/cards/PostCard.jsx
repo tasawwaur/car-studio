@@ -116,7 +116,7 @@ const PostCard = ({ post }) => {
             ) : (
               <div className="pc-avatar-fallback">{(author.name || 'C')[0]}</div>
             )}
-            <img src="/gold-crown.png" alt="Crown" className="pc-crown-badge-img" />
+            <span className="pc-crown-badge-emoji">👑</span>
           </div>
 
           <div className="pc-user-info">
