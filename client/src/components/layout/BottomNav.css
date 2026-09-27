@@ -1,163 +1,150 @@
+/* ═══════════════════════════════════════════════════════════
+   Luxury Golden Bottom Navigation Bar — Mobile Optimized
+   ═══════════════════════════════════════════════════════════ */
+
 .bottom-nav-wrapper {
   position: fixed;
-  bottom: 12px;
+  bottom: -24px;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 9999;
   display: flex;
   justify-content: center;
   pointer-events: none;
-  padding: 0 12px;
+  padding: 0 4px;
+  background: transparent;
 }
 
-.bottom-nav-pill {
+.golden-nav-container {
   pointer-events: auto;
-  width: 100%;
-  max-width: 410px;
-  height: 64px;
-  border-radius: 32px;
-  background: rgba(10, 11, 24, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid transparent;
-  background-clip: padding-box;
   position: relative;
+  width: 98%;
+  max-width: 440px;
+  aspect-ratio: 1024 / 341;
+  user-select: none;
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.75));
+}
+
+/* Golden Image Bar */
+.golden-nav-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+/* Touch Hitboxes Overlay */
+.golden-nav-hitboxes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 20px rgba(168, 85, 247, 0.3);
+  justify-content: space-between;
+  padding: 0 2.5%;
 }
 
-/* Border Gradient Effect */
-.bottom-nav-pill::before {
-  content: '';
-  position: absolute;
-  inset: -1.5px;
-  border-radius: 33px;
-  padding: 1.5px;
-  background: linear-gradient(135deg, rgba(224, 36, 229, 0.8), rgba(0, 117, 255, 0.8), rgba(168, 85, 247, 0.8));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.nav-tab-item {
+.golden-hitbox {
   flex: 1;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  position: relative;
-  height: 100%;
-  user-select: none;
+  outline: none;
   -webkit-tap-highlight-color: transparent;
-  transition: transform 0.2s ease;
+  transition: transform 0.12s ease;
 }
 
-.nav-tab-item:active {
-  transform: scale(0.92);
+.golden-hitbox:active {
+  transform: scale(0.9);
 }
 
-.icon-frame {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+.golden-hitbox:hover {
+  filter: brightness(1.1);
 }
 
-.nav-tab-item.active .icon-frame {
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.45), rgba(0, 117, 255, 0.45));
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+/* Center Plus Hitbox */
+.center-plus-hitbox {
+  flex: 1.15;
 }
 
-.nav-emoji {
-  font-size: 19px;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-}
-
-.nav-label {
-  font-size: 10px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.65);
-  margin-top: 1px;
-  transition: color 0.2s;
-}
-
-.nav-tab-item.active .nav-label {
-  color: #FFFFFF;
-  font-weight: 700;
-}
-
-/* Center Glowing Plus Button */
-.center-plus-item {
-  flex: 0 0 54px;
-}
-
-.plus-btn-circle {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #A855F7, #3B82F6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 18px rgba(168, 85, 247, 0.95), 0 0 8px rgba(59, 130, 246, 0.8);
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.plus-btn-circle:hover {
-  transform: scale(1.08);
-}
-
-.plus-icon {
-  color: #FFFFFF;
-  font-size: 26px;
-  font-weight: 400;
-  line-height: 1;
-  margin-top: -2px;
-}
-
-/* Notification Badge Dot */
-.badge-relative {
-  position: relative;
-}
-
-.notification-badge {
+/* Active State Glowing Underline Indicator */
+.active-indicator {
   position: absolute;
-  top: 1px;
-  right: 1px;
-  width: 14px;
-  height: 14px;
-  background: #EF4444;
+  bottom: 14%;
+  width: 24px;
+  height: 3px;
+  background: linear-gradient(90deg, #FDE047, #A855F7, #FDE047);
+  border-radius: 4px;
+  box-shadow: 0 0 10px #FDE047, 0 0 16px #A855F7;
+  animation: activeGlowPulse 1.6s infinite alternate ease-in-out;
+}
+
+.center-indicator {
+  bottom: 12%;
+  width: 28px;
+  height: 3.5px;
+}
+
+@keyframes activeGlowPulse {
+  0% {
+    opacity: 0.75;
+    box-shadow: 0 0 8px #FDE047, 0 0 14px #A855F7;
+    transform: scaleX(0.9);
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 14px #FDE047, 0 0 24px #A855F7;
+    transform: scaleX(1.1);
+  }
+}
+
+/* Inbox Notification Badge */
+.inbox-badge {
+  position: absolute;
+  top: 24%;
+  right: 18%;
+  background: linear-gradient(135deg, #EF4444, #DC2626);
   color: #FFFFFF;
   font-size: 9px;
   font-weight: 800;
-  border-radius: 50%;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #0A0B14;
-  box-shadow: 0 0 6px rgba(239, 68, 68, 0.8);
+  border: 1.5px solid #000;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.9);
+  pointer-events: none;
+  z-index: 10;
 }
 
-/* Active Line Indicator at bottom */
-.active-line-indicator {
-  position: absolute;
-  bottom: 2px;
-  width: 22px;
-  height: 2.5px;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #E024E5, #0075FF);
-  box-shadow: 0 0 8px #E024E5;
+/* Media Query for Small Screens */
+@media (max-width: 380px) {
+  .golden-nav-container {
+    width: 100%;
+    max-width: 360px;
+  }
+  .active-indicator {
+    width: 20px;
+    height: 2.5px;
+  }
+  .inbox-badge {
+    top: 22%;
+    right: 14%;
+    font-size: 8px;
+    min-width: 14px;
+    height: 14px;
+  }
 }
