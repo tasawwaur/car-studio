@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getPlayerByNameOrId } from '../data/realPlayersData';
 import BottomNav from '../components/layout/BottomNav';
 import './Chat.css';
 
@@ -32,6 +33,14 @@ const Chat = () => {
   const navigate = useNavigate();
 
   const chatId = userId || 'c1';
+
+  const chatPlayer = getPlayerByNameOrId(userId) || {
+    id: userId || 'c1',
+    name: 'Ananya Roy',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200',
+    vehicleNumber: 'MH 02 CZ 7777',
+    isVerified: true
+  };
 
   const [messages, setMessages] = useState(() => {
     try {
@@ -135,18 +144,23 @@ const Chat = () => {
           ←
         </button>
 
-        <div className="dc-user-header-info">
+        <div 
+          className="dc-user-header-info"
+          onClick={() => navigate(`/profile/${chatPlayer.id || chatId}`)}
+          style={{ cursor: 'pointer' }}
+          title={`View ${chatPlayer.name}'s Profile`}
+        >
           <div className="dc-hdr-avatar-ring">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" alt="Driver" className="dc-hdr-avatar" />
+            <img src={chatPlayer.avatar} alt={chatPlayer.name} className="dc-hdr-avatar" />
             <span className="dc-hdr-online-dot" />
           </div>
 
           <div className="dc-hdr-text">
             <div className="dc-hdr-name-row">
-              <span className="dc-hdr-name">Ananya Roy</span>
-              <span className="dc-hdr-verified">✓</span>
+              <span className="dc-hdr-name">{chatPlayer.name}</span>
+              {chatPlayer.isVerified !== false && <span className="dc-hdr-verified">✓</span>}
             </div>
-            <span className="dc-hdr-vehicle">🚗 MH 02 CZ 7777</span>
+            <span className="dc-hdr-vehicle">🚗 {chatPlayer.vehicleNumber || 'MH 02 CZ 7777'}</span>
           </div>
         </div>
 

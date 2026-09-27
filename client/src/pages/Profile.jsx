@@ -1,7 +1,7 @@
 import React, { useState, useContext, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { REAL_PLAYERS_DATA } from '../data/realPlayersData';
+import REAL_PLAYERS_DATA, { getPlayerByNameOrId, getUserAvatar } from '../data/realPlayersData';
 import BottomNav from '../components/layout/BottomNav';
 import './Profile.css';
 
