@@ -1,85 +1,196 @@
-.booking-page {
-  background-color: var(--bg-dark, #05070D);
-  min-height: 100vh;
-  color: var(--text-light, #FFFFFF);
-}
+/* ═══════════════════════════════════════════════════════════
+   Screen 8: Car Booking Page Styling
+   ═══════════════════════════════════════════════════════════ */
 
-.booking-content {
-  padding: 16px;
+.bk-page {
+  min-height: 100vh;
+  background: #050A14;
+  background-image: radial-gradient(circle at 50% 10%, rgba(59, 130, 246, 0.18), transparent 50%);
   display: flex;
   flex-direction: column;
+  color: #FFFFFF;
 }
 
-.toggle-pills {
+.bk-header {
   display: flex;
-  background: var(--bg-surface, #0B111B);
-  border-radius: 12px;
-  padding: 4px;
-  margin-bottom: 24px;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
 }
 
-.toggle-pills .pill {
-  flex: 1;
-  text-align: center;
-  padding: 12px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 14px;
+.bk-back-btn {
   background: transparent;
   border: none;
+  color: #FFFFFF;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.toggle-pills .active-gradient {
-  background: linear-gradient(135deg, #4F46E5, #7C3AED);
-  color: #fff;
+.bk-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
 }
 
-.booking-form {
+/* ── Content ── */
+.bk-content {
+  padding: 10px 18px 120px;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Segmented Control Toggle */
+.bk-toggle-pills {
+  display: flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 26px;
+  padding: 4px;
+  margin-bottom: 20px;
+}
+
+.bk-pill {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 22px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bk-pill.active {
+  background: linear-gradient(135deg, #3B82F6, #A855F7);
+  color: #FFFFFF;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.5);
+}
+
+/* Booking Form Cards */
+.bk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.bk-form-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid rgba(59, 130, 246, 0.35);
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+
+.bk-card-icon {
+  font-size: 20px;
+}
+
+.bk-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bk-card-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.bk-card-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.bk-search-btn {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #3B82F6, #A855F7);
+  border: none;
+  color: #FFFFFF;
+  font-size: 15.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
+  margin-top: 6px;
+}
+
+/* Popular Cars Section */
+.bk-popular-sec {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.form-card {
-  background: var(--bg-surface, #0B111B);
-  border: 1px solid var(--border-color, rgba(255,255,255,0.10));
-  border-radius: 16px;
-  padding: 16px;
+.bk-sec-hdr {
   display: flex;
   align-items: center;
-  gap: 16px;
+  justify-content: space-between;
 }
 
-.form-card .icon {
-  font-size: 24px;
+.bk-sec-title {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 0;
 }
 
-.form-info {
+.bk-see-all {
+  font-size: 12.5px;
+  color: #3B82F6;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bk-cars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.bk-car-card {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.bk-car-card:active {
+  transform: scale(0.96);
+}
+
+.bk-car-thumb {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+}
+
+.bk-car-meta {
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
+  gap: 2px;
 }
 
-.form-info .label {
-  font-size: 12px;
-  color: var(--text-muted, #9AA4B2);
+.bk-car-name {
+  font-size: 12.5px;
+  font-weight: 700;
 }
 
-.form-info .value {
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 4px;
-}
-
-.w-full {
-  width: 100%;
-}
-
-.mt-16 { margin-top: 16px; }
-.mt-24 { margin-top: 24px; }
-.mt-12 { margin-top: 12px; }
-
-.v-price {
-  font-size: 14px;
-  color: #4F46E5;
-  font-weight: 600;
+.bk-car-price {
+  font-size: 11px;
+  color: #3B82F6;
+  font-weight: 700;
 }

@@ -1,23 +1,361 @@
-.followers-page {
+/* ═══════════════════════════════════════════════════════════
+   100 Real Player Profiles & Followers Page
+   ═══════════════════════════════════════════════════════════ */
+
+.fl-page {
   min-height: 100vh;
-  background: var(--bg);
-}
-.f-tabs {
+  background: #05030A;
+  background-image: 
+    radial-gradient(circle at 10% 15%, rgba(168, 85, 247, 0.22), transparent 45%),
+    radial-gradient(circle at 90% 40%, rgba(234, 179, 8, 0.2), transparent 45%);
   display: flex;
-  border-bottom: 1px solid var(--border);
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  color: #FFFFFF;
 }
-.f-tab {
-  flex: 1;
-  text-align: center;
-  padding: 16px;
-  font-weight: 600;
-  color: var(--text-muted);
+
+/* ── Header ── */
+.fl-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(5, 3, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1.5px solid rgba(234, 179, 8, 0.4);
+}
+
+.fl-hdr-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(10, 6, 18, 0.85);
+  border: 2px solid #EAB308;
+  outline: 1px solid rgba(168, 85, 247, 0.6);
+  color: #FDE047;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
+  box-shadow: 0 0 12px rgba(234, 179, 8, 0.4);
+  -webkit-tap-highlight-color: transparent;
 }
-.f-tab.active {
-  color: var(--primary-solid);
-  border-bottom: 2px solid var(--primary-solid);
+
+.fl-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
 }
-.f-list {
-  padding: 16px;
+
+/* ── Content Container ── */
+.fl-content {
+  padding-top: 74px;
+  padding-bottom: 120px;
+  flex: 1;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+/* Search Bar */
+.fl-search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(10, 6, 18, 0.85);
+  border: 2px solid #EAB308;
+  outline: 1px solid rgba(168, 85, 247, 0.5);
+  border-radius: 30px;
+  padding: 10px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 0 14px rgba(234, 179, 8, 0.2);
+}
+
+.fl-search-icon {
+  font-size: 18px;
+  color: #FDE047;
+}
+
+.fl-search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.fl-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* Tabs */
+.fl-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+}
+
+.fl-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fl-tab-btn.active {
+  color: #FDE047;
+}
+
+.fl-active-indicator {
+  position: absolute;
+  bottom: -1.5px;
+  left: 20%;
+  right: 20%;
+  height: 3px;
+  background: linear-gradient(90deg, #FDE047, #A855F7, #FDE047);
+  border-radius: 4px;
+  box-shadow: 0 0 10px #FDE047;
+}
+
+/* Players List */
+.fl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fl-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(10, 6, 18, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid #EAB308;
+  outline: 1px solid rgba(168, 85, 247, 0.5);
+  border-radius: 20px;
+  padding: 12px 14px;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(234, 179, 8, 0.15);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.fl-card:active {
+  transform: scale(0.98);
+}
+
+.fl-card:hover {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.35);
+}
+
+/* Avatar Frame Styles */
+.fl-avatar-frame-wrap {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  padding: 2.5px;
+  flex-shrink: 0;
+}
+
+.fl-avatar-frame-wrap.crown_gold {
+  background: linear-gradient(135deg, #FDE047, #EAB308);
+  box-shadow: 0 0 12px rgba(253, 224, 71, 0.7);
+}
+
+.fl-avatar-frame-wrap.fire_purple {
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.7);
+}
+
+.fl-avatar-frame-wrap.diamond_blue {
+  background: linear-gradient(135deg, #3B82F6, #06B6D4);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.7);
+}
+
+.fl-avatar-frame-wrap.neon_green {
+  background: linear-gradient(135deg, #22C55E, #10B981);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.7);
+}
+
+.fl-avatar-frame-wrap.gold_ring {
+  background: linear-gradient(135deg, #EAB308, #A855F7);
+  box-shadow: 0 0 12px rgba(234, 179, 8, 0.5);
+}
+
+.fl-avatar-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid #05030A;
+}
+
+.fl-crown-overlay {
+  position: absolute;
+  top: -12px;
+  left: -8px;
+  width: 24px;
+  height: 24px;
+  filter: drop-shadow(0 0 6px #FDE047);
+}
+
+.fl-online-dot {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #05030A;
+}
+
+.fl-online-dot.online {
+  background: #22C55E;
+  box-shadow: 0 0 8px #22C55E;
+}
+
+.fl-online-dot.offline {
+  background: #64748B;
+}
+
+/* Info */
+.fl-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.fl-name-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.fl-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.fl-verified {
+  width: 15px;
+  height: 15px;
+  background: #3B82F6;
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.fl-username {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Plate Badge */
+.fl-plate-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(18, 22, 36, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 1px 8px 1px 5px;
+  width: fit-content;
+  margin-top: 2px;
+}
+
+.fl-plate-car {
+  font-size: 10px;
+}
+
+.fl-plate-text {
+  font-family: 'Courier New', monospace;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: #FDE047;
+}
+
+.fl-plate-check {
+  background: #22C55E;
+  color: #FFFFFF;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  font-size: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+/* Actions */
+.fl-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fl-follow-btn {
+  background: rgba(168, 85, 247, 0.15);
+  border: 1.5px solid rgba(168, 85, 247, 0.6);
+  color: #D8B4FE;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.fl-follow-btn.following {
+  background: linear-gradient(135deg, #A855F7, #7C3AED);
+  border-color: transparent;
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.6);
+}
+
+.fl-msg-btn {
+  background: rgba(10, 6, 18, 0.85);
+  border: 1.5px solid #EAB308;
+  color: #FDE047;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
+  -webkit-tap-highlight-color: transparent;
 }

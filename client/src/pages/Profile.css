@@ -1,176 +1,404 @@
-.profile-page {
-  background-color: var(--bg-dark, #05070D);
+/* ═══════════════════════════════════════════════════════════
+   Luxury Profile Page — Exact Reference Matching
+   ═══════════════════════════════════════════════════════════ */
+
+.pf-page {
   min-height: 100vh;
-  color: var(--text-light, #FFFFFF);
-}
-
-.header-username {
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.edit-btn-small {
-  background: transparent;
-  color: #fff;
-  border: 1px solid var(--border-color);
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.cover-banner {
-  height: 150px;
-  background: linear-gradient(180deg, #1e3a8a 0%, #312e81 100%);
-  width: 100%;
-}
-
-.profile-info-section {
-  padding: 0 16px;
-  margin-top: -40px;
-}
-
-.profile-top-row {
+  background: #050A14;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.18), transparent 45%),
+    radial-gradient(circle at 90% 40%, rgba(34, 197, 94, 0.12), transparent 45%);
   display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  color: #FFFFFF;
+}
+
+/* ── Cover Image Header ── */
+.pf-cover-banner {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: #0B132B;
+}
+
+.pf-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pf-cover-overlay-btns {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-end;
+  z-index: 10;
 }
 
-.profile-avatar-wrapper {
-  width: 80px;
-  height: 80px;
+.pf-cover-back-btn {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  padding: 4px;
-  background: var(--bg-dark);
+  background: rgba(5, 10, 20, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
-.profile-avatar-img {
+.pf-cover-edit-btn {
+  padding: 6px 18px;
+  border-radius: 20px;
+  background: rgba(5, 10, 20, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ── Main Profile Content ── */
+.pf-body {
+  padding: 0 18px 120px;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+}
+
+/* ── Avatar Header Row ── */
+.pf-avatar-header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: -46px;
+  margin-bottom: 14px;
+}
+
+.pf-avatar-wrapper {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 3px solid #050A14;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  background: #0B132B;
+}
+
+.pf-avatar-img {
   width: 100%;
   height: 100%;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.edit-profile-btn {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 16px;
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-.user-name {
-  font-size: 20px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin: 0;
-}
-
-.verified-badge {
-  color: #3b82f6;
-  font-size: 16px;
-}
-
-.user-handle {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin: 2px 0 0 0;
-}
-
-.user-bio {
-  font-size: 14px;
-  margin: 0;
-}
-
-.user-location {
+.pf-avatar-online-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #22C55E;
+  color: #FFFFFF;
   font-size: 12px;
-  color: var(--text-muted);
-  margin: 0;
-}
-
-.vehicle-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.2);
-  padding: 8px 12px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.green-dot {
-  color: #22c55e;
-  font-size: 10px;
-}
-
-.verified-text {
-  color: #22c55e;
-  font-weight: 500;
-  font-size: 12px;
-}
-
-.stats-row {
-  display: flex;
-  justify-content: space-around;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-  padding: 16px 0;
-}
-
-.stat-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.stat-num {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.stat-label {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.profile-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.profile-tabs .tab {
-  flex: 1;
-  text-align: center;
-  padding: 16px 0;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-muted);
-}
-
-.profile-tabs .active-tab {
-  color: #fff;
-  border-bottom: 2px solid #fff;
-  font-weight: 600;
-}
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-}
-
-.grid-item {
-  aspect-ratio: 1;
-  background: var(--bg-surface2);
+  font-weight: 800;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  border: 2px solid #050A14;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+}
+
+.pf-header-actions {
+  margin-bottom: 6px;
+}
+
+.pf-edit-profile-btn {
+  padding: 8px 20px;
+  border-radius: 22px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.pf-edit-profile-btn:active {
+  transform: scale(0.95);
+}
+
+.pf-edit-profile-btn.following {
+  background: rgba(34, 197, 94, 0.2);
+  border-color: #22C55E;
+  color: #22C55E;
+}
+
+/* ── Name & Identity ── */
+.pf-identity-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 18px;
+}
+
+.pf-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pf-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+.pf-blue-badge {
+  width: 17px;
+  height: 17px;
+  background: #3B82F6;
+  color: #FFFFFF;
+  border-radius: 50%;
+  font-size: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.pf-username {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+}
+
+/* ── 3 Stats Columns ── */
+.pf-stats-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 10px;
+  margin-bottom: 18px;
+}
+
+.pf-stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pf-stat-item.clickable {
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease;
+}
+
+.pf-stat-item.clickable:active {
+  transform: scale(0.92);
+}
+
+.pf-stat-value {
+  font-size: 18px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.3px;
+}
+
+.pf-stat-title {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
+}
+
+.pf-stat-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Bio & Location ── */
+.pf-bio-location-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.pf-bio-paragraph {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.88);
+  margin: 0;
+  font-weight: 500;
+}
+
+.pf-bio-edit-input {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 8px 12px;
+  color: #FFFFFF;
+  font-size: 13.5px;
+  outline: none;
+}
+
+.pf-location-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 13px;
+}
+
+.pf-location-pin {
+  font-size: 14px;
+}
+
+.pf-location-text {
+  font-weight: 500;
+}
+
+/* ── Vehicle Pill Row ── */
+.pf-vehicle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.pf-vehicle-plate-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1.5px solid rgba(59, 130, 246, 0.4);
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+
+.pf-plate-flag {
+  font-size: 14px;
+}
+
+.pf-plate-text {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.8px;
+}
+
+.pf-verified-vehicle-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pf-green-check-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #22C55E;
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+}
+
+.pf-verified-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #22C55E;
+}
+
+/* ── Tab Bar Navigation (Posts | Reels | Vehicles) ── */
+.pf-tab-bar {
+  display: flex;
+  align-items: center;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 12px;
+}
+
+.pf-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.15s ease;
+}
+
+.pf-tab-btn.active {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.pf-tab-underline {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  right: 20%;
+  height: 2.5px;
+  background: linear-gradient(90deg, #A855F7, #EC4899);
+  border-radius: 3px;
+  box-shadow: 0 0 8px #A855F7;
+}
+
+/* ── 3x3 Photo Grid ── */
+.pf-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.pf-grid-card {
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0B132B;
+  cursor: pointer;
+  position: relative;
+}
+
+.pf-grid-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.pf-grid-card:hover .pf-grid-thumb {
+  transform: scale(1.04);
 }

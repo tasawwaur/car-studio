@@ -1500,4 +1500,78 @@ export const REAL_PLAYERS_DATA = [
     "bio": "Ferrari F8 Tributo Driver \u26a1 Passion for speed & high performance drives."
   }
 ];
+
+const SAMPLE_ID_ALIASES = {
+  'u1': 'p4', // Mohammad Tasawwar
+  'u2': 'p1', // Rahul Sharma
+  'u3': 'p5', // Vikram Singh
+  'c1': 'p2', // Ananya Roy
+  'c2': 'p3', // Priya Verma
+  'c3': 'p1', // Rahul Sharma
+  'c4': 'p5', // Vikram Singh
+  'm1': 'p1', // Rahul Sharma
+  'm2': 'p6', // Neha Khan
+  'm3': 'p5', // Vikram Singh
+  's0': 'p4', // Mohammad Tasawwar
+  's1': 'p2', // Ananya Roy
+  's2': 'p1', // Rahul Sharma
+  's3': 'p5', // Vikram Singh
+  's4': 'p6', // Neha Khan
+  'fs0': 'p1',
+  'fs1': 'p2',
+  'fs2': 'p3',
+  'fs3': 'p4',
+  'fs4': 'p5',
+  'fs5': 'p6'
+};
+
+export const getPlayerByNameOrId = (identifier) => {
+  if (!identifier) return null;
+  const rawSearch = String(identifier).trim();
+  const search = decodeURIComponent(rawSearch).toLowerCase();
+
+  // 1. Check direct alias mapping
+  const mappedId = SAMPLE_ID_ALIASES[search] || SAMPLE_ID_ALIASES[rawSearch];
+  if (mappedId) {
+    const aliasedPlayer = REAL_PLAYERS_DATA.find(p => p.id === mappedId);
+    if (aliasedPlayer) return aliasedPlayer;
+  }
+
+  // 2. Exact or partial match in REAL_PLAYERS_DATA
+  const found = REAL_PLAYERS_DATA.find(p => 
+    p.id.toLowerCase() === search || 
+    p.username.toLowerCase() === search || 
+    p.name.toLowerCase() === search ||
+    p.name.toLowerCase().includes(search) ||
+    search.includes(p.name.toLowerCase()) ||
+    (p.vehicleNumber && p.vehicleNumber.toLowerCase() === search)
+  );
+
+  if (found) return found;
+
+  // 3. Fallback: Generate a deterministic unique player profile so it NEVER returns null for a specific userId
+  const charSum = search.split('').reduce((acc, c) => acc + c.charCodeAt(0), 0);
+  const templatePlayer = REAL_PLAYERS_DATA[charSum % REAL_PLAYERS_DATA.length];
+  
+  const cleanName = rawSearch
+    .replace(/^[@_]/, '')
+    .split(/[_ -]+/)
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+
+  return {
+    ...templatePlayer,
+    id: rawSearch,
+    name: cleanName || 'Verified Driver',
+    username: rawSearch.toLowerCase().replace(/\s+/g, '_'),
+    bio: `${templatePlayer.vehicleName} Owner & Driver ⚡ High performance automotive enthusiast.`
+  };
+};
+
+export const getUserAvatar = (nameOrId, fallbackAvatar) => {
+  const player = getPlayerByNameOrId(nameOrId);
+  if (player && player.avatar) return player.avatar;
+  return fallbackAvatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200';
+};
+
 export default REAL_PLAYERS_DATA;

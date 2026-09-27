@@ -1,142 +1,233 @@
-.community-page {
-  background-color: var(--bg-dark, #05070D);
+/* ═══════════════════════════════════════════════════════════
+   Luxury Public Group Chat Screen — CarConnect
+   ═══════════════════════════════════════════════════════════ */
+
+.pub-chat-page {
   min-height: 100vh;
-  color: var(--text-light, #FFFFFF);
+  background: #05030A;
+  background-image: 
+    radial-gradient(circle at 10% 15%, rgba(168, 85, 247, 0.2), transparent 45%),
+    radial-gradient(circle at 90% 40%, rgba(234, 179, 8, 0.18), transparent 45%);
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+  color: #FFFFFF;
 }
 
-.chat-header-info {
+/* ── Top Sticky Header ── */
+.pub-chat-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(5, 3, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1.5px solid rgba(234, 179, 8, 0.4);
+}
+
+.pub-hdr-round-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(10, 6, 18, 0.85);
+  border: 2px solid #EAB308;
+  outline: 1px solid rgba(168, 85, 247, 0.6);
+  color: #FDE047;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(234, 179, 8, 0.4);
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pub-hdr-round-btn:active {
+  transform: scale(0.9);
+}
+
+.pub-chat-header-title {
   display: flex;
   flex-direction: column;
-  margin-left: 8px;
+  align-items: center;
 }
 
-.chat-title {
+.pub-chat-name {
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.pub-chat-status {
+  font-size: 11px;
+  color: #22C55E;
   font-weight: 600;
-  font-size: 16px;
 }
 
-.chat-subtitle {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.dots-icon {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.chat-area {
+/* ── Messages Scroll Area ── */
+.pub-chat-body {
+  padding-top: 76px;
+  padding-bottom: 190px;
   flex: 1;
-  padding: 16px;
+  max-width: 520px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 14px;
+  padding-right: 14px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  overflow-y: auto;
-  padding-bottom: 140px; /* input area + bottom nav */
+  gap: 14px;
 }
 
-.message {
+.pub-msg-row {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   max-width: 85%;
 }
 
-.sent {
+.pub-msg-row.mine {
   align-self: flex-end;
+  flex-direction: row-reverse;
 }
 
-.received {
+.pub-msg-row.other {
   align-self: flex-start;
 }
 
-.msg-avatar {
-  width: 32px;
-  height: 32px;
+.pub-msg-avatar {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  margin-top: 20px;
+  object-fit: cover;
+  border: 1.5px solid #EAB308;
+  box-shadow: 0 0 8px rgba(234, 179, 8, 0.4);
+  flex-shrink: 0;
 }
 
-.msg-content {
+.pub-msg-bubble-wrap {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
-.align-right {
-  align-items: flex-end;
+.pub-msg-sender-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.sender-name {
+.pub-sender-name {
   font-size: 12px;
-  color: var(--text-muted);
-  margin-left: 4px;
+  font-weight: 700;
+  color: #FDE047;
 }
 
-.msg-bubble {
-  background: var(--bg-surface2, #101827);
-  padding: 12px 16px;
-  border-radius: 16px;
+.pub-sender-vehicle {
+  font-size: 10.5px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.pub-msg-bubble {
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 13.5px;
+  line-height: 1.45;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+}
+
+.other-bubble {
+  background: rgba(18, 12, 30, 0.9);
+  border: 1.5px solid rgba(168, 85, 247, 0.5);
+  color: #FFFFFF;
   border-top-left-radius: 4px;
-  font-size: 14px;
-  position: relative;
 }
 
 .my-bubble {
-  background: linear-gradient(135deg, #4F46E5, #7C3AED);
-  border-radius: 16px;
+  background: linear-gradient(135deg, #A855F7, #7C3AED);
+  border: 1.5px solid #FDE047;
+  color: #FFFFFF;
   border-top-right-radius: 4px;
-  color: #fff;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.5);
 }
 
-.msg-time {
+.pub-msg-time {
   font-size: 10px;
-  color: var(--text-muted);
-  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.45);
+  align-self: flex-end;
 }
 
-.with-reaction {
-  margin-bottom: 10px;
-}
-
-.reaction {
-  position: absolute;
-  bottom: -12px;
-  right: 12px;
-  background: var(--bg-surface, #0B111B);
-  border: 1px solid var(--border-color);
-  padding: 2px 6px;
-  border-radius: 12px;
-  font-size: 10px;
-  white-space: nowrap;
-}
-
-.chat-input-area {
+/* ── Input Box Bar (Fixed Above Bottom Nav) ── */
+.pub-chat-input-bar {
   position: fixed;
-  bottom: 80px; /* above bottom nav */
-  left: 0;
-  width: 100%;
-  padding: 12px 16px;
-  background: var(--bg-surface, #0B111B);
-  border-top: 1px solid var(--border-color);
+  bottom: 125px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%;
+  max-width: 480px;
+  background: rgba(10, 6, 18, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid #EAB308;
+  outline: 1.5px solid rgba(168, 85, 247, 0.7);
+  border-radius: 30px;
+  padding: 8px 14px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  z-index: 40;
+  gap: 10px;
+  z-index: 10001;
+  pointer-events: auto;
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
 }
 
-.chat-input {
-  flex: 1;
-  background: var(--bg-surface2, #101827);
-  border: none;
-  border-radius: 20px;
-  padding: 10px 16px;
-  color: #fff;
-  outline: none;
-}
-
-.chat-input-area .icon {
+.pub-input-icon {
   font-size: 20px;
-  color: var(--text-muted);
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.pub-chat-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+  pointer-events: auto;
+}
+
+.pub-chat-input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.pub-send-btn {
+  background: linear-gradient(135deg, #A855F7, #EC4899);
+  border: 1.5px solid #FDE047;
+  color: #FFFFFF;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.9);
+  transition: transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pub-send-btn:active {
+  transform: scale(0.88);
 }

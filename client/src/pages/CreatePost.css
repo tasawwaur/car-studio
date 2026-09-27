@@ -1,114 +1,217 @@
-.create-post-page {
-  background-color: var(--bg-dark, #05070D);
+/* ═══════════════════════════════════════════════════════════
+   Screen 12: Create Post Page Styling
+   ═══════════════════════════════════════════════════════════ */
+
+.cp-page {
   min-height: 100vh;
-  color: var(--text-light, #FFFFFF);
+  background: #050A14;
+  background-image: radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.18), transparent 50%);
   display: flex;
   flex-direction: column;
+  color: #FFFFFF;
 }
 
-.save-icon {
-  font-size: 20px;
-  font-weight: bold;
-  color: #4F46E5;
-}
-
-.create-post-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.media-tabs {
-  display: flex;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.media-tabs .tab {
-  flex: 1;
-  text-align: center;
-  padding: 12px 0;
-  font-size: 14px;
-  color: var(--text-muted);
-}
-
-.media-tabs .active-tab {
-  color: #fff;
-  border-bottom: 2px solid #fff;
-  font-weight: 600;
-}
-
-.image-preview-area {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4/3;
-  background: linear-gradient(135deg, #0f172a, #1e3a8a);
+.cp-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 14px;
+  padding: 16px 20px;
 }
 
-.emoji-large {
-  font-size: 64px;
-}
-
-.close-preview {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(0,0,0,0.5);
-  color: #fff;
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.caption-input-area {
-  padding: 16px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.caption-input-area textarea {
-  width: 100%;
+.cp-back-btn {
   background: transparent;
   border: none;
-  color: #fff;
-  font-size: 14px;
-  resize: none;
-  outline: none;
+  color: #FFFFFF;
+  font-size: 20px;
+  cursor: pointer;
 }
 
-.post-options {
-  display: flex;
-  flex-direction: column;
+.cp-title {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
 }
 
-.option-row {
+/* ── Content ── */
+.cp-content {
+  padding: 10px 18px 50px;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Post Type Selector Tabs */
+.cp-type-tabs {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
-  border-bottom: 1px solid var(--border-color);
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 26px;
+  padding: 4px;
+  margin-bottom: 16px;
 }
 
-.border-none {
-  border-bottom: none;
+.cp-tab-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 22px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.option-row .icon {
-  font-size: 20px;
+.cp-tab-btn.active {
+  background: #FFFFFF;
+  color: #050A14;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.3);
 }
 
-.option-row .text {
+/* Media Preview Box */
+.cp-media-box {
+  width: 100%;
+  height: 220px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.cp-preview-wrap {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.cp-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cp-remove-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(5, 10, 20, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #FFFFFF;
   font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cp-upload-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.cp-upload-icon {
+  font-size: 32px;
+}
+
+.cp-upload-text {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.6);
   font-weight: 500;
 }
 
-.post-btn-container {
-  padding: 16px;
-  margin-top: auto;
+/* Options List */
+.cp-options-list {
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.cp-option-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.cp-option-item.border-none {
+  border-bottom: none;
+}
+
+.cp-opt-icon {
+  font-size: 18px;
+}
+
+.cp-opt-col {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 2px;
+}
+
+.cp-opt-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
+}
+
+.cp-opt-title {
+  flex: 1;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.cp-opt-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #FFFFFF;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.cp-opt-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: #FFFFFF;
+}
+
+.cp-opt-arrow {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 18px;
+}
+
+/* Post Button */
+.cp-post-btn {
+  width: 100%;
+  padding: 14px 0;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #3B82F6, #A855F7);
+  border: none;
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.5);
 }
